@@ -32,22 +32,22 @@ export class LoginComponent implements OnInit {
         this.clienteService.getUsers(user, clave).subscribe(
           data => {
             // Success
-            
             this.users = data;
-            console.log("Usuario", this.users)
+
             if (this.users.Usuario_UserName == user && this.users.Usuario_Password == clave) {
               Swal.fire('Login Correcto');
               localStorage.setItem('isLoggedin', 'true');
               this.router.navigate(['/dashboard']);
-            } else {
-              Swal.fire('Clave o Usuario Incorrecto');
             }
           },
-  
           error => {
-            console.error(error);
+            Swal.fire('Clave o Usuario Incorrecto, Intente Nuevamente...');
           }
         );
       }
+    }
+
+    onRegister(){
+      this.router.navigate(['/register']);
     }
 }
