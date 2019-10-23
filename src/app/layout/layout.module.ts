@@ -18,6 +18,8 @@ import { NavComponent } from './nav/nav.component';
 import { Screen2Component } from './screen2/screen2.component';
 
 
+
+
 @NgModule({
     imports: [
         CommonModule,

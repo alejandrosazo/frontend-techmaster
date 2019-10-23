@@ -3,12 +3,31 @@ import { CommonModule } from '@angular/common';
 import { Screen1Component } from './screen1.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { Screen1RoutingModule } from './screen1-routing.module';
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import { MatButtonModule, MatCardModule, MatIconModule, MatTableModule } from '@angular/material';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule, MatSelectModule, MatInputModule  } from '@angular/material';
+
+import { StatModule } from '../../shared/modules/stat/stat.module';
 
 @NgModule({
   declarations: [Screen1Component],
-  imports: [
+  imports: [MatCheckboxModule,
+    MatInputModule,
+    MatSelectModule,
     CommonModule,
     Screen1RoutingModule,
+    CommonModule,
+    MatFormFieldModule,
+        MatGridListModule,
+        StatModule,
+        MatCardModule,
+        MatCardModule,
+        FormsModule, ReactiveFormsModule,
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
     FlexLayoutModule.withConfig({addFlexToParent: false})
   ]
 })
