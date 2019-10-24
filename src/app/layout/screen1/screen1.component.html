@@ -2,10 +2,9 @@
     <h2 class="app-name">Registro de Pagos</h2>
   </div>
 
-  <div style="text-align:center;">
-<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
-  <div fxFlex>
-      <table style="margin: 0 auto;" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+
+      <table style="margin: 0 auto; width: 1500px;;" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
           <ng-container matColumnDef="position">
               <th mat-header-cell *matHeaderCellDef> Id. </th>
               <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
@@ -15,60 +14,69 @@
               <td mat-cell *matCellDef="let element"> {{element.Nombre}} </td>
           </ng-container>
           <ng-container matColumnDef="weight">
-              <th mat-header-cell *matHeaderCellDef> Direccion </th>
-              <td mat-cell *matCellDef="let element"> {{element.Direccion}} </td>
+              <th mat-header-cell *matHeaderCellDef> Servicio </th>
+              <td mat-cell *matCellDef="let element"> {{element.Servicio}} </td>
           </ng-container>
           <ng-container matColumnDef="symbol">
-              <th mat-header-cell *matHeaderCellDef> Tipo de Dispositivo </th>
-              <td mat-cell *matCellDef="let element"> {{element.descripcion_TipoDisp}} </td>
+              <th mat-header-cell *matHeaderCellDef> Total Cancelado </th>
+              <td mat-cell *matCellDef="let element"> {{element.Cancelado}} </td>
           </ng-container>
           <ng-container matColumnDef="IP">
-              <th mat-header-cell *matHeaderCellDef> IP de Dispositivo </th>
-              <td mat-cell *matCellDef="let element"> {{element.ip}} </td>
+              <th mat-header-cell *matHeaderCellDef> Fecha del Pago </th>
+              <td mat-cell *matCellDef="let element"> {{element.Fecha}} </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-  </div>
-</div>
-</div>
+  
 
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form" fxFlex>
+
+
+<form [formGroup]="loginForm" (ngSubmit)="RegistrarPago()" class="login-form" fxFlex>
     <div class="text-center" style="margin-top: 50px;">
-        <h2 class="app-name">Tech Master Force</h2>
+        <h2 class="app-name">Ingresar Pagos</h2>
       </div>
+
+      
 
      
         <div fxFlexFill style="text-align:center;">
-          <mat-form-field >
-            <input id="user" name="user" formControlName="user" matInput placeholder="Usuario" />
+          <mat-form-field  style="margin-left: 55px; width: 600px;">
+            <mat-label>Clientes</mat-label>
+            <mat-select (selectionChange)="changeCliente($event.value)" [(value)]="selectedValue" name="val">
+              <mat-option *ngFor="let val of valuePicker" [value]="val.Id">
+                {{val.Nombre}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
-          <mat-form-field  style="margin-left: 55px; max-width: 190em;">
-            <input id="user" name="user" formControlName="user" matInput placeholder="Usuario" />
+
+          <mat-form-field  style="margin-left: 55px; width: 600px;">
+            <mat-label>Mes a Cancelar</mat-label>
+            <mat-select (selectionChange)="changeMes($event.value)"  name="valMes">
+              <mat-option *ngFor="let valMes of dataSourceMes" [value]="valMes.Id_Mes">
+                {{valMes.Mes}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
+
         </div>
       
         
-      <div fxFlex fxLayout="row" fxLayout.lt-md="row">
-        <div fxFlexFill>
-          <mat-form-field class="w-100">
-            <input matInput id="clave" name="clave" formControlName="clave" type="password" placeholder="Password" />
-          </mat-form-field>
-        </div>
+      <div fxFlexFill style="text-align:center;">
+        <mat-form-field  style="margin-left: 55px; width: 600px;">
+          <input [readonly]="!editable" matInput [matDatepicker]="picker1" placeholder="Fecha Actual" [formControl]="date" id="fecha" name="fecha" formControlName="fecha" (dateInput)="inputEvent($event)" >
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field style="margin-left: 55px; width: 600px;">
+          <input matInput id="monto" name="monto" formControlName="monto" type="number" placeholder="Monto a Cancelar" />
+        </mat-form-field>
       </div>
 
-      <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+      <div fxFlexFill style="text-align:center;">
         <div fxFlexFill>
-          <mat-form-field class="w-100">
-            <input matInput id="clave" name="clave" formControlName="clave" type="password" placeholder="Password" />
-          </mat-form-field>
-        </div>
-      </div>
-     
-      <div fxFlex fxLayout="row" fxLayout.lt-md="column">
-        <div fxFlexFill>
-          <button mat-raised-button color="primary" class="w-100" type="submit">Iniciar Sesion</button>
+          <button style="margin-left: 55px; width: 600px;" mat-raised-button color="primary" class="w-100" type="submit">Ingresar Pago</button>
         </div>
       </div>
 </form>
   
+<button (click)="prueba()" ></button>

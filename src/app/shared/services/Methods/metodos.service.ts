@@ -8,8 +8,25 @@ export class MetodosService {
   constructor(protected http: HttpClient) { }
 
 
+  InsertPago(value) {
+    return this.http.post('https://backend-techmaster.azurewebsites.net/api/User/RegisterPago', value, { responseType: 'json' });
+  }
+
+  InsertCliente(value ) {
+    return this.http.post('https://backend-techmaster.azurewebsites.net/api/User/RegisterCliente', value, { responseType: 'json' });
+  }
+
+
+
+
+
   getClients() {
     return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/ReadClient');
+  }
+
+
+  getPagos() {
+    return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/ReadPagos');
   }
 
 
