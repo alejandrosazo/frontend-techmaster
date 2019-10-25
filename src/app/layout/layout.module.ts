@@ -16,6 +16,13 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
 import { Screen2Component } from './screen2/screen2.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatCardModule, MatTableModule } from '@angular/material';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule  } from '@angular/material';
 
 
 
@@ -31,7 +38,21 @@ import { Screen2Component } from './screen2/screen2.component';
         MatInputModule,
         MatMenuModule,
         MatListModule,
-        TranslateModule
+        TranslateModule,
+
+        MatCheckboxModule,
+    MatInputModule,
+    MatDatepickerModule, MatNativeDateModule,
+    MatSelectModule,
+    MatFormFieldModule,
+        MatGridListModule,
+        
+        MatCardModule,
+        MatCardModule, 
+        FormsModule, ReactiveFormsModule,
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
     ],
     declarations: [Screen2Component, LayoutComponent, NavComponent, TopnavComponent, SidebarComponent, ]
 

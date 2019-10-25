@@ -12,6 +12,7 @@ export interface ElementosCliente {
     ip: string;
     descripcion_TipoDisp: string;
     Id_TipoDispositivo: string;
+    Eliminar: string;
 }
 
 
@@ -23,7 +24,7 @@ const ELEMENT_DATA: ElementosCliente[] = [];
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    displayedColumns = ['position', 'name', 'weight', 'symbol', 'IP'];
+    displayedColumns = ['position', 'name', 'weight', 'symbol', 'IP', 'Eliminar'];
     dataSource;
     TotalClientes;
     TotalServicios;
@@ -48,6 +49,35 @@ export class DashboardComponent implements OnInit {
 
 
 
+    }
+
+    Eliminar(Id){
+      Swal.fire({
+        title: 'Seguro Quiere Eliminar el Cliente',
+        text: "Desea Eliminar El Registro?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminar!'
+      }).then((result) => {
+        if (result.value) {
+          this.MetodoServices.DeleteCliente(Id).subscribe(page => {
+
+          });
+          
+          Swal.fire(
+            'Eliminado!',
+            'El Cliente a sido Eliminado',
+            'success'
+          ).then(() => 
+          {
+            window.location.reload();
+          }
+          );
+        }
+      })
+      
     }
 
 

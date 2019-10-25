@@ -75,46 +75,6 @@ export class Screen1Component implements OnInit {
 
   }
 
-
-  prueba() {
-    const Value = {
-    'Cliente': {
-      'Nombre1': 'Rodrigo',
-      'Nombre2': 'Fernando',
-      'Apellido1': 'Velasquez',
-      'Apellido2': 'Sosa',
-      'Direccion': 'Jutiapa',
-      'Correo': 'ocrreis',
-      'Descripcion_Client': 'Nuevo',
-    },
-    'Dispositivo':
-    {
-      'Id_TipoDispositivo_Disp': 1,
-      'Descripcion_Disp': 'Nuevo',
-      'IP': '32423423'
-    }
-    };
-    const Dispositivo = {
-      'Id_TipoDispositivo_Disp': 1,
-      'Descripcion_Disp': 'Nuevo',
-      'IP': '32423423'
-    };
-    const Telefono = {
-      'Numero': '545646',
-      'Extension': '252'
-    };
-
-    const Servicio = {
-      'Descripcion_Servicio': 'Nuevoos',
-      'Velocidad': '45',
-      'Tipo': 'Cable'
-    };
-    this.MetodoServices.InsertCliente(Value).subscribe(data => {
-      console.log(data);
-
-    });
-  }
-
   RegistrarPago() {
 
     const monto = this.loginForm.get('monto').value;
@@ -131,7 +91,9 @@ export class Screen1Component implements OnInit {
       console.log(data);
 
     });
-    Swal.fire('Pago Registrado');
+    Swal.fire('Pago Registrado').then(()=> {
+      window.location.reload();
+    });
 
   }
   }

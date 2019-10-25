@@ -6,7 +6,7 @@
         <app-stat [bgClass]="'warn'" [icon]="'view_list'" [count]=TotalServicios [label]="'Total de Servicios'"></app-stat>
     </div>
     <div fxFlex>
-        <app-stat [bgClass]="'success'" [icon]="'shopping_cart'" [count]=TotalPagos [label]="'Pagos Totales en Octubre'"></app-stat>
+        <app-stat [bgClass]="'success'" [icon]="'shopping_cart'" [count]=TotalPagos [label]="'Pagos Totales Recibidos'"></app-stat>
     </div>
     
 </div>
@@ -34,6 +34,14 @@
                 <th mat-header-cell *matHeaderCellDef> IP de Dispositivo </th>
                 <td mat-cell *matCellDef="let element"> {{element.ip}} </td>
             </ng-container>
+            <ng-container matColumnDef="Eliminar">
+                <th mat-header-cell *matHeaderCellDef> Eliminar Cliente </th>
+                <td mat-cell *matCellDef="let element"><a (click)="Eliminar(element.Id)" ><i class="material-icons">
+                    delete_outline
+                    </i></a>   </td>
+            </ng-container>
+
+            
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>

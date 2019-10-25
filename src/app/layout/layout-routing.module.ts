@@ -28,7 +28,11 @@ const routes: Routes = [
             {
                 path: 'screen2',
                 component: Screen2Component
-            }
+            },
+            {
+                path: 'screen2',
+                loadChildren: './screen2/screen2.module#Screen2Module'
+            },
         ]
     }
 ];

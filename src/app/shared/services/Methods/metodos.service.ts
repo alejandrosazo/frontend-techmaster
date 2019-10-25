@@ -53,4 +53,10 @@ export class MetodosService {
   }
 
 
+  DeleteCliente(id) {
+    return this.http.delete('https://backend-techmaster.azurewebsites.net/api/User/' + id);
+  }
+
+
+
 }
