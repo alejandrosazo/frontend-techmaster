@@ -51,39 +51,26 @@
 
       <div fxFlexFill style="text-align:center;">
         <mat-form-field  style="margin-left: 55px; width: 500px;">
-          <mat-label>Tipo Dispositivo</mat-label>
+          <mat-label>Servicio a Contratar</mat-label>
           <mat-select (selectionChange)="changeCliente($event.value)" [(value)]="selectedValueTipoDisp" name="val">
             <mat-option *ngFor="let val of valueTipoDisp" [value]="val.Id">
-              {{val.TipoDisp}}
+              {{val.Servicio}}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field style="margin-left: 55px; width: 500px;">
-          <input matInput id="descrip_disp" name="descrip_disp" formControlName="descrip_disp" type="text" placeholder="Descripcion del Dispositivo" />
+          <input matInput id="velocidad" name="velocidad" formControlName="velocidad" type="text" placeholder="Velocidad" />
         </mat-form-field>
 
       </div>
     
-      <div fxFlexFill style="text-align:center;">
-        <mat-form-field style="margin-left: 55px; width: 500px;">
-          <input matInput id="ip" name="ip" formControlName="ip" type="text" placeholder="IP del Dispositivo" />
-        </mat-form-field>
-        <mat-form-field style="margin-left: 55px; width: 500px;">
-          <input matInput id="descrip_serv" name="descrip_serv" formControlName="descrip_serv" type="text" placeholder="Descripcion del Servicio" />
-        </mat-form-field>
-      </div>
-  
-      <div fxFlexFill style="text-align:center;">
-        <mat-form-field style="margin-left: 55px; width: 500px;">
-          <input matInput id="velocidad" name="velocidad" formControlName="velocidad" type="text" placeholder="Velocidad del Plan" />
-        </mat-form-field>
-        <mat-form-field style="margin-left: 55px; width: 500px;">
-          <input matInput id="tipo" name="tipo" formControlName="tipo" type="text" placeholder="Tipo de Dispositivo" />
-        </mat-form-field>
-      </div>
+     
 
       <div fxFlexFill style="text-align:center;">
+        <mat-form-field style="margin-left: 55px; width: 500px;">
+          <input matInput id="precio" name="precio" formControlName="precio" type="text" placeholder="Precio a Cancelar" />
+        </mat-form-field>
         <mat-form-field style="margin-left: 55px; width: 500px;">
           <input matInput id="descrip_client" name="descrip_client" formControlName="descrip_client" type="text" placeholder="Descripcion Cliente" />
         </mat-form-field>

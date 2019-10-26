@@ -16,9 +16,13 @@ export class MetodosService {
     return this.http.post('https://backend-techmaster.azurewebsites.net/api/User/RegisterCliente', value, { responseType: 'json' });
   }
 
+  InsertDispositivo(value ) {
+    return this.http.post('https://backend-techmaster.azurewebsites.net/api/User/RegisterDispositivo', value, { responseType: 'json' });
+  }
 
 
 
+  
 
   getClients() {
     return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/ReadClient');
@@ -32,6 +36,11 @@ export class MetodosService {
 
   getMonth() {
     return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/ReadMonth');
+  }
+
+  
+  getServicios() {
+    return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/ReadServicios');
   }
 
 

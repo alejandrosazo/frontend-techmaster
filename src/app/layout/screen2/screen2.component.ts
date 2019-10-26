@@ -33,11 +33,12 @@ export class Screen2Component implements OnInit {
       numero: new FormControl('', []),
       correo: new FormControl('', []),
       direccion: new FormControl('', []),
-      descrip_disp: new FormControl('', []),
+      velocidad: new FormControl('', []),
       ip: new FormControl('', []),
       descrip_serv: new FormControl('', []),
-      velocidad: new FormControl('', []),
+      
       tipo: new FormControl('', []),
+      precio: new FormControl('', []),
       descrip_client:  new FormControl('', [])
     });
 
@@ -46,20 +47,23 @@ export class Screen2Component implements OnInit {
   }
 
   TipoDispostivio() {
-  this.MetodoServices.getReadTipoDispositivo().subscribe(
+  this.MetodoServices.getServicios().subscribe(
     data => {
         this.tipoDisp = [];
         const datosCliente = Object.values(data);
 
         for (let i = 0; i < datosCliente.length; i++) {
             const newCliente = {
-                'Id': datosCliente[i].id_TipoDispositivo,
-                'TipoDisp':  datosCliente[i].descripcion_TipoDis
+                'Id': datosCliente[i].id_Servicio,
+                'Servicio':  datosCliente[i].tipo,
+                'Velocidad': datosCliente[i].velocidad,
+                'Precio': datosCliente[i].precio
 
                              };
             this.tipoDisp = this.tipoDisp.concat(newCliente);
         }
         this.valueTipoDisp = this.tipoDisp;
+     
       
         
     },
@@ -72,6 +76,22 @@ export class Screen2Component implements OnInit {
 
 changeCliente(value) {
   this.selectedValueTipoDisp = value;
+  
+  for(var i=0; i < this.valueTipoDisp.length; i++ ){
+    if(this.valueTipoDisp[i].Id == value){
+      
+      this.loginForm.patchValue(
+        { 
+          velocidad: this.valueTipoDisp[i].Velocidad
+        });
+        this.loginForm.patchValue(
+          { 
+            precio:'Q. ' + this.valueTipoDisp[i].Precio
+          });
+      
+    }
+  }
+  
 }
 
 RegistrarCliente() {
@@ -84,11 +104,7 @@ RegistrarCliente() {
   const numero = this.loginForm.get('numero').value;
   const correo = this.loginForm.get('correo').value;
   const direccion = this.loginForm.get('direccion').value;
-  const descrip_disp = this.loginForm.get('descrip_disp').value;
-  const ip = this.loginForm.get('ip').value;
-  const descrip_serv = this.loginForm.get('descrip_serv').value;
-  const velocidad = this.loginForm.get('velocidad').value;
-  const tipo = this.loginForm.get('tipo').value;
+ 
   const descrip_client = this.loginForm.get('descrip_client').value;
 
 
@@ -103,14 +119,9 @@ RegistrarCliente() {
     "Descripcion_Client": descrip_client,
     "Numero": numero,
     "Extension": extension,
-    "Id_TipoDispositivo_Disp": this.selectedValueTipoDisp,
-    "Descripcion_Disp": descrip_disp,
-    "IP": ip,
-    "Descripcion_Servicio": descrip_serv,
-    "Velocidad": velocidad,
-    "Tipo": tipo
-    
+    "Id_Servicio": this.selectedValueTipoDisp,
   };
+  console.log(ArrayPago);
   
   
   if (nombre1 === '') {

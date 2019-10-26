@@ -1,0 +1,101 @@
+
+<div class="text-center">
+  <h2 class="app-name">Registro de Dispositivos</h2>
+</div>
+
+
+<form [formGroup]="loginForm" (ngSubmit)="RegistrarDispositivos()" class="login-form" fxFlex>
+  <div class="text-center" style="margin-top: 50px;">
+      
+    </div>
+
+
+    <div fxFlexFill style="text-align:center;">
+      <mat-form-field  style="margin-left: 55px; width: 500px;">
+        <mat-label>Cliente</mat-label>
+        <mat-select (selectionChange)="changeCliente($event.value)" [(value)]="selectCliente" name="val">
+          <mat-option *ngFor="let val of valueCliente" [value]="val.Id">
+            {{val.Nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlexFill style="text-align:center;">
+      <mat-form-field  style="margin-left: 55px; width: 500px;">
+        <mat-label>(1) Dispositivo </mat-label>
+        <mat-select (selectionChange)="changeDisp1($event.value)" [(value)]="selectDispositivo1" name="val">
+          <mat-option *ngFor="let val of valueDisp" [value]="val.Id">
+            {{val.Dispositivo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field style="margin-left: 55px; width: 500px;">
+        <input matInput id="IP1" name="IP1" formControlName="IP1" type="text" placeholder="IP Dispositivo 1" />
+      </mat-form-field>
+    </div>
+
+    <div fxFlexFill style="text-align:center;">
+      <mat-form-field  style="margin-left: 55px; width: 500px;">
+        <mat-label>(2) Sectorial</mat-label>
+        <mat-select (selectionChange)="changeDisp2($event.value)" [(value)]="selectDispositivo2" name="val">
+          <mat-option *ngFor="let val of valueDisp" [value]="val.Id">
+            {{val.Dispositivo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field style="margin-left: 55px; width: 500px;">
+        <input matInput id="IP2" name="IP2" formControlName="IP2" type="text" placeholder="IP Dispositivo 2" />
+      </mat-form-field>
+    </div>
+
+
+    
+    <div fxFlexFill style="text-align:center;">
+      <mat-form-field  style="margin-left: 55px; width: 500px;">
+        <mat-label>(3) Dispositivo</mat-label>
+        <mat-select (selectionChange)="changeDisp3($event.value)" [(value)]="selectDispositivo3" name="val">
+          <mat-option *ngFor="let val of valueDisp" [value]="val.Id">
+            {{val.Dispositivo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field style="margin-left: 55px; width: 500px;">
+        <input matInput id="IP3" name="IP3" formControlName="IP3" type="text" placeholder="IP Dispositivo 3" />
+      </mat-form-field>
+    </div>
+
+
+      <div fxFlexFill style="text-align:center;">
+        <mat-form-field  style="margin-left: 55px; width: 500px;">
+          <mat-label>(3) Routher</mat-label>
+          <mat-select (selectionChange)="changeDisp4($event.value)" [(value)]="selectDispositivo4" name="val">
+            <mat-option *ngFor="let val of valueDisp" [value]="val.Id">
+              {{val.Dispositivo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+  
+        <mat-form-field style="margin-left: 55px; width: 500px;">
+          <input matInput id="IP4" name="IP4" formControlName="IP4" type="text" placeholder="IP Dispositivo 4" />
+        </mat-form-field>
+
+      </div>
+    
+     
+
+      
+
+      <div fxFlexFill style="text-align:center;">
+        <div fxFlexFill>
+          <button style="margin-left: 55px; width: 600px;" mat-raised-button color="primary" class="w-100" type="submit">Ingresar Dispositivo</button>
+        </div>
+      </div>
+</form>

@@ -88,36 +88,31 @@ export class DashboardComponent implements OnInit {
                 const datosCliente = Object.values(data);
 
                 const ClientePivote = datosCliente[0];
-                const DispositivoPivote = datosCliente[1];
-                const TipoDispPivote = datosCliente[2];
+                const ServicioPivote = datosCliente[1];
+                
 
                 for (let i = 0; i < ClientePivote.length; i++) {
                     const newCliente = {
                         'Id': ClientePivote[i].id_Cliente_Client,
+                        'Id_Servicio_Cliente': ClientePivote[i].id_Cliente_Servicio,
                         'Nombre':  ClientePivote[i].nombre1,
                         'Direccion': ClientePivote[i].direccion,
-                        'ip': '',
-                        'descripcion_TipoDisp': '',
-                        'Id_TipoDispositivo': ''                    };
+                        'Tipo': '',
+                        'Velocidad': '' ,
+                        'Id_Servicio': ''
+                      };
                     this.cliente = this.cliente.concat(newCliente);
                 }
 
-                for (let i = 0; i < DispositivoPivote.length; i++) {
+                for (let i = 0; i < ServicioPivote.length; i++) {
                     this.cliente.forEach(client => {
-                        if (client.Id === DispositivoPivote[i].id_Cliente_Disp) {
-                        client.ip = DispositivoPivote[i].ip,
-                        client.Id_TipoDispositivo = DispositivoPivote[i].id_TipoDispositivo_Disp;
+                        if (client.Id_Servicio_Cliente === ServicioPivote[i].id_Servicio) {
+                        client.Tipo = ServicioPivote[i].tipo,
+                        client.Velocidad = ServicioPivote[i].velocidad;
                         }
                     });
                 }
 
-                for (let i = 0; i < TipoDispPivote.length; i++) {
-                    this.cliente.forEach(client => {
-                        if (client.Id_TipoDispositivo === TipoDispPivote[i].id_TipoDispositivo) {
-                        client.descripcion_TipoDisp = TipoDispPivote[i].descripcion_TipoDis;
-                        }
-                    });
-                }
               // Success
               console.log('cliente ', data);
 

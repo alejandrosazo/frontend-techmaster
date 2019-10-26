@@ -23,6 +23,7 @@ import { MatCardModule, MatTableModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule  } from '@angular/material';
+import { Screen3Component } from './screen3/screen3.component';
 
 
 
@@ -54,7 +55,7 @@ import { MatCheckboxModule, MatSelectModule, MatDatepickerModule, MatNativeDateM
         MatButtonModule,
         MatIconModule,
     ],
-    declarations: [Screen2Component, LayoutComponent, NavComponent, TopnavComponent, SidebarComponent, ]
+    declarations: [Screen2Component, LayoutComponent, NavComponent, TopnavComponent, SidebarComponent, Screen3Component, ]
 
 })
 export class LayoutModule { }

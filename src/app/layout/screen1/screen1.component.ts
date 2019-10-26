@@ -100,11 +100,21 @@ export class Screen1Component implements OnInit {
 
   changeMes(value) {
     this.valueMes = value;
+
+    
 }
 
 
 changeCliente(value) {
   this.valueClient = value;
+  for(var i=0; i < this.valuePicker.length; i++ ){
+    if(this.valuePicker[i].Id == value){
+  this.loginForm.patchValue(
+    { 
+      monto: this.valuePicker[i].Precio
+    });
+  }}
+
 }
 
   MesesOn() {
@@ -200,12 +210,14 @@ Clientes() {
         for (let i = 0; i < ClientePivote.length; i++) {
             const newCliente = {
                 'Id': ClientePivote[i].id_Cliente_Client,
-                'Nombre':  ClientePivote[i].nombre1
+                'Nombre':  ClientePivote[i].nombre1,
+                'Precio': ClientePivote[i].precio
 
                              };
             this.cliente = this.cliente.concat(newCliente);
         }
         this.valuePicker = this.cliente;
+console.log(this.valuePicker);
 
     },
     error => {
