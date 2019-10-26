@@ -55,6 +55,7 @@ export class Screen1Component implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
+  valueServicio;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -82,7 +83,7 @@ export class Screen1Component implements OnInit {
       'Id_Mes_Pago': this.valueMes,
       'Monto': monto,
       'Fecha': new Date().toISOString(),
-      'Id_Cliente_Pago': this.valueClient
+      'Id_Cliente_Pago': this.valueServicio
     };
     if (monto === '') {
       Swal.fire('Favor Llenar los campos');
@@ -113,7 +114,10 @@ changeCliente(value) {
     { 
       monto: this.valuePicker[i].Precio
     });
-  }}
+
+    this.valueServicio = this.valuePicker[i].Id_Servicio
+  }
+}
 
 }
 
@@ -162,7 +166,7 @@ changeCliente(value) {
                     'Servicio': '',
                     'Cancelado': '',
                     'Fecha': '',
-                    'Id_Cliente_Serv': '',
+                    'Id_Cliente_Serv': ClientePivote[i].id_Cliente_Servicio,
                     'Id_Servicio': ''
 
                 };
@@ -171,9 +175,8 @@ changeCliente(value) {
 
             for (let i = 0; i < ServicioPivote.length; i++) {
                 this.cliente.forEach(client => {
-                    if (client.Id === ServicioPivote[i].id_Cliente_Servicio) {
-                    client.Id_Cliente_Serv = ServicioPivote[i].id_Cliente_Servicio,
-                    client.Servicio = ServicioPivote[i].descripcion_Servicio,
+                    if (client.Id_Cliente_Serv === ServicioPivote[i].id_Servicio) {
+                    client.Servicio = ServicioPivote[i].tipo,
                     client.Id_Servicio = ServicioPivote[i].id_Servicio;
                     }
                 });
@@ -189,7 +192,8 @@ changeCliente(value) {
             }
           // Success
           this.dataSource = this.cliente;
-
+            console.log('datasoruce', this.dataSource);
+            
         },
         error => {
 
@@ -211,7 +215,8 @@ Clientes() {
             const newCliente = {
                 'Id': ClientePivote[i].id_Cliente_Client,
                 'Nombre':  ClientePivote[i].nombre1,
-                'Precio': ClientePivote[i].precio
+                'Precio': ClientePivote[i].precio,
+                'Id_Servicio': ClientePivote[i].id_Cliente_Servicio
 
                              };
             this.cliente = this.cliente.concat(newCliente);
