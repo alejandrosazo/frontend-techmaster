@@ -38,6 +38,10 @@ export class MetodosService {
     return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/ReadMonth');
   }
 
+  getDispositivos() {
+    return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/ReadDispositivo');
+  }
+
   
   getServicios() {
     return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/ReadServicios');
