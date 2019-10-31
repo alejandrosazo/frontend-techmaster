@@ -24,7 +24,7 @@ const ELEMENT_DATA: ElementosCliente[] = [];
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    displayedColumns = ['position', 'name', 'weight', 'symbol', 'IP', 'Eliminar'];
+    displayedColumns = ['position', 'name', 'weight', 'symbol', 'IP', 'Eliminar', 'Editar'];
     dataSource;
     TotalClientes;
     TotalServicios;
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
         // this.dataSource.filter = filterValue;
     }
 
-    constructor(protected MetodoServices: MetodosService) {
+    constructor(protected MetodoServices: MetodosService, private router:Router) {
 
     }
 
@@ -45,11 +45,14 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this.TotalDatos();
         this.Clientes();
-
-
-
-
     }
+
+
+    Editar(Id){
+      localStorage.setItem('IdClient',Id)
+      this.router.navigate(['/screen2']);
+    }
+
 
     Eliminar(Id){
       Swal.fire({
@@ -125,6 +128,7 @@ export class DashboardComponent implements OnInit {
             }
           );
     }
+
 
     TotalDatos() {
         this.MetodoServices.getReadTotalCliente().subscribe(

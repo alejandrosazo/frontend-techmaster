@@ -12,8 +12,8 @@
 
     <div fxFlexFill style="text-align:center;">
       <mat-form-field  style="margin-left: 55px; width: 500px;">
-        <mat-label>Cliente</mat-label>
-        <mat-select (selectionChange)="changeCliente($event.value)" [(value)]="selectCliente" name="val">
+        <mat-label>{{client}}</mat-label>
+        <mat-select [disabled]="disable" (selectionChange)="changeCliente($event.value)" [(value)]="selectCliente" name="val">
           <mat-option *ngFor="let val of valueCliente" [value]="val.Id">
             {{val.Nombre}}
           </mat-option>
@@ -95,10 +95,11 @@
 
       <div fxFlexFill style="text-align:center;">
         <div fxFlexFill>
-          <button style="margin-left: 55px; width: 600px;" mat-raised-button color="primary" class="w-100" type="submit">Ingresar Dispositivo</button>
+          <button style="margin-left: 55px; width: 600px;" mat-raised-button color="primary" class="w-100" type="submit">{{btn}} Dispositivo</button>
         </div>
       </div>
 </form>
+<button (click)='cancel()' [disabled]="isDisable" style="margin-top: 10px; margin-left: 545px; width: 600px;" mat-raised-button color="warn" class="w-100" >Cancelar Actualizacion</button>
 
 
 <div class="text-center" style="margin-top: 100px;">
@@ -136,6 +137,18 @@
             <th mat-header-cell *matHeaderCellDef> IP 4 </th>
             <td mat-cell *matCellDef="let element"> {{element.IP4}} </td>
         </ng-container>
+        <ng-container matColumnDef="Eliminar">
+          <th mat-header-cell *matHeaderCellDef> Eliminar Dispositivo </th>
+          <td mat-cell *matCellDef="let element"><a (click)="Eliminar(element.Id)" ><i class="material-icons">
+              delete_outline
+              </i></a>   </td>
+      </ng-container>
+      <ng-container matColumnDef="Editar">
+        <th mat-header-cell *matHeaderCellDef> Editar Cliente </th>
+        <td mat-cell *matCellDef="let element"><a (click)="Editar(element.Id)" ><i class="material-icons">
+            update
+            </i></a>   </td>
+    </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

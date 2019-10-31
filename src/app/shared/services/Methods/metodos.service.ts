@@ -23,6 +23,11 @@ export class MetodosService {
 
 
   
+  getClientsUpdate(Id) {
+    return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/ReadClientUpdate?Id='+Id);
+  }
+
+  
 
   getClients() {
     return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/ReadClient');
@@ -70,6 +75,23 @@ export class MetodosService {
     return this.http.delete('https://backend-techmaster.azurewebsites.net/api/User/' + id);
   }
 
+  DeletePago(id) {
+    return this.http.delete('https://backend-techmaster.azurewebsites.net/api/User/DeletePago?id=' + id);
+  }
+
+  
+  DeleteDisp(id) {
+    return this.http.delete('https://backend-techmaster.azurewebsites.net/api/User/DeleteDisp?id=' + id);
+  }
+
+  UpdateClient(value ) {
+    return this.http.put('https://backend-techmaster.azurewebsites.net/api/User/UpdateCliente', value, { responseType: 'json' });
+  }
+
+  UpdateDispositivos(value ) {
+    return this.http.put('https://backend-techmaster.azurewebsites.net/api/User/UpdateDispositivo', value, { responseType: 'json' });
+  }
 
 
 }
+

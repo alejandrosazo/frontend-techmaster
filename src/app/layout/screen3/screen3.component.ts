@@ -15,7 +15,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 export class Screen3Component implements OnInit {
 
   constructor(private router: Router, protected MetodoServices: MetodosService, private fb: FormBuilder) { }
-  displayedColumns = ['Distribuye', 'IP2', 'Cliente', 'Punto', 'IP3', 'Routher', 'IP4'];
+  displayedColumns = ['Distribuye', 'IP2', 'Cliente', 'Punto', 'IP3', 'Routher', 'IP4', 'Eliminar', 'Editar'];
   loginForm: FormGroup;
   selectCliente;
   valueCliente;
@@ -29,7 +29,12 @@ export class Screen3Component implements OnInit {
   dispositivos;
   dataSource;
   tipoDispositivo;
-
+  client = 'Cliente';
+  btn = 'Ingresar';
+  disable = false;
+  isDisable = true;
+  clienteEditar;
+  dispEditar;
   ngOnInit() {
     this.loginForm = this.fb.group({      
       IP1: new FormControl('', []),
@@ -91,13 +96,78 @@ Clientes() {
   );
 }
 
+Editar(Id){
+  this.clienteEditar = Id;
+  this.disable = true;
+  this.isDisable = false;
+  this.btn = 'Actualizar'
+  for(var i =0; i < this.dataSource.length; i++){
+ if(this.dataSource[i].Id == Id){
+ this.client = this.dataSource[i].Nombre;
+ this.dispEditar = this.dataSource[i].Id_Dispositivo;
+  this.loginForm.patchValue(
+    { 
+      IP1: this.dataSource[i].IP1,
+      IP2: this.dataSource[i].IP2,
+      IP3: this.dataSource[i].IP3,
+      IP4: this.dataSource[i].IP4,
+    });
+}
+}
+
+
+}
+
+cancel(){
+  this.loginForm.patchValue(
+    { 
+      IP1: '',
+      IP2: '',
+      IP3: '',
+      IP4: ''
+    });
+    this.disable = false;
+    this.isDisable = true;
+    this.btn = 'Ingresar';
+}
+
+Eliminar(Id){
+  Swal.fire({
+    title: 'Seguro Quiere Eliminar el Dispositivo',
+    text: "Desea Eliminar El Registro?",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, Eliminar!'
+  }).then((result) => {
+    if (result.value) {
+      this.MetodoServices.DeleteDisp(Id).subscribe(page => {
+
+      });
+      
+      Swal.fire(
+        'Eliminado!',
+        'El Dispositivo a sido Eliminado',
+        'success'
+      ).then(() => 
+      {
+        window.location.reload();
+      }
+      );
+    }
+  })
+  
+}
+
 RegistrarDispositivos(){
+  if(this.disable == false){
+    //INICIO REGISTRO
   const ip1 = this.loginForm.get('IP1').value;
   const ip2= this.loginForm.get('IP2').value;
   const ip3 = this.loginForm.get('IP3').value;
   const ip4 = this.loginForm.get('IP4').value;
 
-  
   const ArrayDispositivo = {
     "Id_Cliente_Disp": this.selectCliente,
     "Id_TipoDispositivo_Disp1": this.selectDispositivo1,
@@ -122,6 +192,48 @@ RegistrarDispositivos(){
   }); 
 
 }
+//FIN REGISTRO
+  }
+  else
+  {
+    //INICIO ACTUALIZAR
+    const IdIdsp = this.dispEditar;
+    const idClient = this.clienteEditar;
+  const ip1 = this.loginForm.get('IP1').value;
+  const ip2= this.loginForm.get('IP2').value;
+  const ip3 = this.loginForm.get('IP3').value;
+  const ip4 = this.loginForm.get('IP4').value;
+
+  const ArrayDispositivo = {
+    
+    "Id_Dispositivo": IdIdsp,
+    "Id_TipoDispositivo_Disp1": this.selectDispositivo1,
+    "IP1": ip1,
+    "Id_TipoDispositivo_Disp2": this.selectDispositivo2,
+    "IP2": ip2,
+    "Id_TipoDispositivo_Disp3": this.selectDispositivo3,
+    "IP3": ip3,
+    "Id_TipoDispositivo_Disp4": this.selectDispositivo4,
+    "IP4": ip4,
+    "Id_Cliente_Disp": idClient
+  }
+
+  if (ip1 === '') {
+    Swal.fire('Favor Llenar los campos');
+  } else {
+  this.MetodoServices.UpdateDispositivos(ArrayDispositivo).subscribe(data => {
+    console.log(data);
+
+  });
+  Swal.fire('Dispositivo Registrado Exitosamente').then(()=>{
+    this.cancel();
+    window.location.reload();
+  }); 
+
+}
+//FIN ACTUALIZAR
+  } 
+
 }
 
 

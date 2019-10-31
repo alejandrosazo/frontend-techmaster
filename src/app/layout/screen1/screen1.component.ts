@@ -37,7 +37,7 @@ export class Screen1Component implements OnInit {
 
 
 
-  displayedColumns = ['position', 'name', 'weight', 'symbol', 'IP'];
+  displayedColumns = ['position', 'name', 'weight', 'symbol', 'IP', 'Eliminar'];
   dataSource;
   valuePicker;
   TotalClientes;
@@ -76,6 +76,8 @@ export class Screen1Component implements OnInit {
 
   }
 
+  
+
   RegistrarPago() {
 
     const monto = this.loginForm.get('monto').value;
@@ -103,6 +105,37 @@ export class Screen1Component implements OnInit {
     this.valueMes = value;
 
     
+}
+
+
+
+Eliminar(Id){
+  Swal.fire({
+    title: 'Seguro Quiere Eliminar el Pago',
+    text: "Desea Eliminar El Registro?",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, Eliminar!'
+  }).then((result) => {
+    if (result.value) {
+      this.MetodoServices.DeletePago(Id).subscribe(page => {
+
+      });
+      
+      Swal.fire(
+        'Eliminado!',
+        'El Pago a sido Eliminado',
+        'success'
+      ).then(() => 
+      {
+        window.location.reload();
+      }
+      );
+    }
+  })
+  
 }
 
 
@@ -164,6 +197,7 @@ changeCliente(value) {
                     'Id': ClientePivote[i].id_Cliente_Client,
                     'Nombre':  ClientePivote[i].nombre1,
                     'Servicio': '',
+                    'Id_Pago': '',
                     'Cancelado': '',
                     'Fecha': '',
                     'Id_Cliente_Serv': ClientePivote[i].id_Cliente_Servicio,
@@ -186,6 +220,7 @@ changeCliente(value) {
                 this.cliente.forEach(client => {
                     if (client.Id_Servicio === PagosPivote[i].id_Servicio_Pago) {
                     client.Cancelado = PagosPivote[i].monto,
+                    client.Id_Pago = PagosPivote[i].id_Pago
                     client.Fecha = PagosPivote[i].fecha;
                     }
                 });
