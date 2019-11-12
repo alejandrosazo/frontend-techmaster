@@ -1,8 +1,55 @@
-<div class="text-center">
-    <h2 class="app-name">Registro de Pagos</h2>
-  </div>
 
   
+<form [formGroup]="loginForm" (ngSubmit)="RegistrarPago()" class="login-form" fxFlex>
+  <div class="text-center" style="margin-top: 50px;">
+      <h2 class="app-name">Ingresar Pagos</h2>
+    </div>
+
+    
+
+   
+      <div fxFlexFill style="text-align:center;">
+        <mat-form-field  style="margin-left: 55px; width: 600px;">
+          <mat-label>Clientes</mat-label>
+          <mat-select (selectionChange)="changeCliente($event.value)" [(value)]="selectedValue" name="val">
+            <mat-option *ngFor="let val of valuePicker" [value]="val.Id">
+              {{val.Nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field  style="margin-left: 55px; width: 600px;">
+          <mat-label>Mes a Cancelar</mat-label>
+          <mat-select (selectionChange)="changeMes($event.value)"  name="valMes">
+            <mat-option *ngFor="let valMes of dataSourceMes" [value]="valMes.Id_Mes">
+              {{valMes.Mes}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+    
+      
+    <div fxFlexFill style="text-align:center;">
+      <mat-form-field  style="margin-left: 55px; width: 600px;">
+        <input [readonly]="!editable" matInput [matDatepicker]="picker1" placeholder="Fecha Actual" [formControl]="date" id="fecha" name="fecha" formControlName="fecha" (dateInput)="inputEvent($event)" >
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field style="margin-left: 55px; width: 600px;">
+        <input matInput id="monto" name="monto" formControlName="monto" type="number" placeholder="Monto a Cancelar" />
+      </mat-form-field>
+    </div>
+
+    <div fxFlexFill style="text-align:center;">
+      <div fxFlexFill>
+        <button style="margin-left: 55px; width: 600px;" mat-raised-button color="primary" class="w-100" type="submit">Ingresar Pago</button>
+      </div>
+    </div>
+</form>
+  
+<div class="text-center">
+  <h2 class="app-name">Registro de Pagos</h2>
+</div>
 
       <table style="margin: 0 auto; width: 1500px;;" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
           <ng-container matColumnDef="position">
@@ -38,50 +85,4 @@
 
 
 
-<form [formGroup]="loginForm" (ngSubmit)="RegistrarPago()" class="login-form" fxFlex>
-    <div class="text-center" style="margin-top: 50px;">
-        <h2 class="app-name">Ingresar Pagos</h2>
-      </div>
-
-      
-
-     
-        <div fxFlexFill style="text-align:center;">
-          <mat-form-field  style="margin-left: 55px; width: 600px;">
-            <mat-label>Clientes</mat-label>
-            <mat-select (selectionChange)="changeCliente($event.value)" [(value)]="selectedValue" name="val">
-              <mat-option *ngFor="let val of valuePicker" [value]="val.Id">
-                {{val.Nombre}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field  style="margin-left: 55px; width: 600px;">
-            <mat-label>Mes a Cancelar</mat-label>
-            <mat-select (selectionChange)="changeMes($event.value)"  name="valMes">
-              <mat-option *ngFor="let valMes of dataSourceMes" [value]="valMes.Id_Mes">
-                {{valMes.Mes}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-        </div>
-      
-        
-      <div fxFlexFill style="text-align:center;">
-        <mat-form-field  style="margin-left: 55px; width: 600px;">
-          <input [readonly]="!editable" matInput [matDatepicker]="picker1" placeholder="Fecha Actual" [formControl]="date" id="fecha" name="fecha" formControlName="fecha" (dateInput)="inputEvent($event)" >
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field style="margin-left: 55px; width: 600px;">
-          <input matInput id="monto" name="monto" formControlName="monto" type="number" placeholder="Monto a Cancelar" />
-        </mat-form-field>
-      </div>
-
-      <div fxFlexFill style="text-align:center;">
-        <div fxFlexFill>
-          <button style="margin-left: 55px; width: 600px;" mat-raised-button color="primary" class="w-100" type="submit">Ingresar Pago</button>
-        </div>
-      </div>
-</form>
   

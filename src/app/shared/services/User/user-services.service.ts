@@ -11,7 +11,7 @@ export class UserServicesService {
 
    }
    
-  getUsers(users, password) {
-    return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/LoginUser?UserName='+users+'&Password='+password, { responseType: 'json' });
-  }
+    getUsers(users, password) {
+      return this.http.get('https://backend-techmaster.azurewebsites.net/api/User/LoginUser?UserName='+users+'&Password='+password, { responseType: 'json' });
+    }
 }
